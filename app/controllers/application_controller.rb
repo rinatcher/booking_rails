@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  after_action :request_response_logger
+#   after_action :request_response_logger
 
   def request_response_logger
     RequestResponseLog.create(
