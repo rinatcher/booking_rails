@@ -1,0 +1,44 @@
+<%= render 'shared/errors', obj: @room %>
+<div class="row">
+  <div class="col-xs-12">
+    <%= form_with model: @room, :html => {class: "form-horizontal", role: "form"} do |f| %>
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= f.label :name %>
+        </div>
+        <div class="col-sm-6">
+          <%= f.text_field :name, class: "form-control", placeholder: "Название номера", autofocus: true %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= f.label :price %>
+        </div>
+        <div class="col-sm-6">
+          <%= f.text_field :price, class: "form-control", placeholder: "Стоимость", autofocus: true %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= f.label :images %>
+        </div>
+        <div class="col-sm-6">
+          <%= f.file_field :images, multiple:true, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= f.label :description %>
+        </div>
+        <div class="col-sm-6">
+          <%= f.text_area :description, rows: 10, class: "form-control", placeholder: "Описание" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <%= f.submit class: 'btn btn-primary btn-large' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

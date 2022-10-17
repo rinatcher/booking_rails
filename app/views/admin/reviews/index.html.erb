@@ -1,0 +1,10 @@
+<div align="center">
+<h1>Отзывы</h1>
+<div class="flickr_pagination">
+  <%= will_paginate %>
+</div>
+</div>
+  <%= render 'shared/review', obj: @reviews %>
+<div align="center">
+  <%= link_to "Оставить отзыв", new_review_path, class: "btn btn-xs btn-primary" %>
+</div>
