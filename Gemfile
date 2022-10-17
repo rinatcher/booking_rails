@@ -92,7 +92,7 @@ end
 gem 'date_validator'
 
 gem 'axlsx'
-gem 'axlsx_rails'
+gem 'caxlsx_rails'
 gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'rubyzip', '>= 1.2.1'
 gem 'sidekiq', '~> 6.5'
