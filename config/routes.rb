@@ -18,7 +18,6 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :reviews
     resources :rooms
-    patch 'rooms', to: 'rooms#edit'
     resources :bookings
   end
 end
