@@ -1,0 +1,32 @@
+<% obj.each do |booking| %>
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <div class="well well-lg">
+        <div class="review-title">
+          <%= booking.room_type %>
+        </div>
+        <div class="review-body">
+          <%= "Имя гостя: #{booking.name}" %> <br>
+          <%= "Email гостя: #{booking.email}" %> <br>
+          <%= "Заезд: #{booking.start_date.strftime("%F")}" %> <br>
+          <%= "Выезд: #{booking.end_date.strftime("%F")}" %> <br>
+        </div>
+        <div class="article-meta-details">
+          <small><%= "Approved : #{booking.approved? ? "true" : "false"}" %>,
+            created <%= time_ago_in_words(booking.created_at) %> ago,
+            updated: <%= time_ago_in_words(booking.updated_at) %> ago</small>
+        </div>
+        <div class="review-actions">
+          <% if current_user.try(:admin?) %>
+            <% if booking.approved == 0 %>
+              <%= link_to 'Approve', admin_booking_path(booking), data: { turbo_method: :patch, turbo_confirm: "Are you sure?" },
+                          class: "btn btn-xs btn-success" %>
+            <% end %>
+            <%= link_to 'Delete', admin_booking_path(booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+                        class: "btn btn-xs btn-danger" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

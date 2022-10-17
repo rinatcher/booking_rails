@@ -1,0 +1,12 @@
+<div align="center">
+  <div class="slider">
+    <% @rooms.each_with_index  do |room, i| %>
+    <div class="slide">
+      <div class="numbertext"><%= "#{i+1} / #{@rooms.length} "%></div>
+      <%= image_tag room.images.first, width: "100%" %>
+    </div>
+  <% end %>
+    <button class="next">&#10095;</button>
+    <button class="prev">&#10094;</button>
+  </div>
+</div>

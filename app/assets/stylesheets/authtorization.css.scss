@@ -1,0 +1,64 @@
+.wrapper
+{
+  max-width: 400px;
+  margin: auto;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.signIn
+{
+  display: none;
+
+  height: 173px;
+}
+
+
+form div
+{
+  width: 100%;
+
+  margin-bottom: 35px;
+}
+
+
+input
+{
+  font-size: 1.1em;
+  font-weight: normal;
+
+  display: block;
+
+  width: 85%;
+  margin: 0 auto;
+  height:45px;
+
+  -webkit-transition: box-shadow .3s;
+  transition: box-shadow .3s;
+  transition: .25s linear;
+  text-align: center;
+
+  color: #050505;
+  border: 0;
+  outline: 0;
+  background: #eee;
+  box-shadow: 0 0 0 2px transparent;
+}
+
+input:focus
+{
+  animation: boxShadow .3s backwards;
+
+  box-shadow: 0 0 0 2px #000000;
+}
+
+
+.btn-sign-up,
+.btn-log-in
+{
+  font-size: 1.2em;
+  font-weight: bold;
+
+  color: white;
+  background: #000000;
+}

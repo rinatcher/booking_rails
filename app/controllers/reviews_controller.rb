@@ -1,45 +1,28 @@
+# frozen_string_literal: true
+
 class ReviewsController < ApplicationController
-  before_action :set_review, only: %i[edit update show destroy]
+  before_action :set_review, only: %i[show]
 
   def index
-    @articles = Review.paginate(page: params[:page], per_page: 5)
+    @reviews = Review.paginate(page: params[:page], per_page: 5).order(created_at: :desc)
   end
 
   def new
-    @article = Review.new
+    @review = Review.new
   end
 
   def create
     @review = Review.new(review_params)
     if @review.save
-      flash[:success] = 'Article was successfully created'
-      redirect_to review_path(@review)
+      flash[:notice] = 'Отзыв отправлен! Ожидайте подтверждения администратора'
+      redirect_to reviews_path
     else
+      flash[:alert] = 'Неверно введены данные'
       render :new
     end
   end
 
-  def show
-  end
-
-  def edit
-  end
-
-  def update
-    if @review.update(review_params)
-      flash[:success] = 'Review was updated'
-      redirect_to review_path(@review)
-    else
-      flash[:success] = 'Review was not updated'
-      render 'edit'
-    end
-  end
-
-  def destroy
-    @article.destroy
-    flash[:success] = 'Review was deleted'
-    redirect_to review_path
-  end
+  def show; end
 
   private
 
@@ -48,7 +31,6 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:title, :description)
+    params.require(:review).permit(:name, :email, :description)
   end
 end
-

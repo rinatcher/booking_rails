@@ -1,0 +1,32 @@
+<% obj.each do |review| %>
+  <% if review.approved == 1 %>
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <div class="well well-lg">
+        <div class="review-title">
+          <% if current_user.try(:admin?) %>
+            <%= link_to review.name, admin_review_path(review) %>
+          <% else%>
+            <%= link_to review.name, review_path(review) %>
+          <% end %>
+        </div>
+        <div class="review-body">
+          <%= truncate(review.description, length: 100) %>
+        </div>
+        <div class="article-meta-details">
+          <small>Created <%= time_ago_in_words(review.created_at) %> ago</small>
+        </div>
+        <div class="review-actions">
+          <% if current_user.try(:admin?) %>
+            <% if review.approved == 0 %>
+            <%= link_to 'Approve', admin_review_path(review), class: "btn btn-xs btn-success" %>
+            <% end %>
+            <%= link_to 'Delete', admin_review_path(review), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+                      class: "btn btn-xs btn-danger" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<% end %>

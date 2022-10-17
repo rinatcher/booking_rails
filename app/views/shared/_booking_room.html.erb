@@ -1,0 +1,18 @@
+<div class="review-title" align="center">
+  <%= obj.name %>
+  <div>
+    <div class="slider">
+      <% obj.images.each_with_index  do |image, i| %>
+        <div class="slide">
+          <div class="numbertext"><%= "#{i+1} / #{obj.images.length} "%></div>
+          <%= image_tag image, width: "100%" %>
+        </div>
+      <% end %>
+      <button class="next">&#10095;</button>
+      <button class="prev">&#10094;</button>
+    </div>
+  </div>
+  <h4><%= "RUB #{obj.price}  за ночь" %></h4>
+</div>
+  <p><%= obj.description %></p>
+

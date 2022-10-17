@@ -1,0 +1,29 @@
+<% obj.each do |review| %>
+    <div class="row">
+      <div class="col-xs-8 col-xs-offset-2">
+        <div class="well well-lg">
+          <div class="review-title">
+              <%= link_to review.name, admin_review_path(review) %>
+          </div>
+          <div class="review-body">
+            <%= truncate(review.description, length: 100) %>
+          </div>
+          <div class="article-meta-details">
+            <small><%= "Approved : #{review.approved? ? "true" : "false"}" %>,
+            created <%= time_ago_in_words(review.created_at) %> ago,
+              updated: <%= time_ago_in_words(review.updated_at) %> ago</small>
+          </div>
+          <div class="review-actions">
+            <% if current_user.try(:admin?) %>
+              <% if review.approved == 0 %>
+                <%= link_to 'Approve', admin_review_path(review), data: { turbo_method: :patch, turbo_confirm: "Are you sure?" },
+                            class: "btn btn-xs btn-success" %>
+              <% end %>
+              <%= link_to 'Delete', admin_review_path(review), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+                          class: "btn btn-xs btn-danger" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>

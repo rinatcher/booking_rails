@@ -1,0 +1,18 @@
+<h1 align="center">Бронирование номера</h1>
+
+<%= render 'shared/booking_room', obj: @room %>
+
+<%= render 'form', obj: @room %>
+
+<script type="text/javascript">
+    (() => {
+        if (window.localStorage) {
+            if (!localStorage.getItem('reload')) {
+                localStorage['reload'] = true;
+                window.location.reload();
+            } else {
+                localStorage.removeItem('reload');
+            }
+        }
+    })();
+</script>

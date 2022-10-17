@@ -1,7 +1,9 @@
-<h1 align="center">Номера</h1>
-
-<div align="center" class="flickr_pagination">
-  <%= will_paginate %>
+<div align="center">
+  <h1>Редактирование номеров</h1>
+  <%= link_to "Добавить номер", new_admin_room_path, class: "btn btn-xs btn-primary" %>
+  <div class="flickr_pagination">
+      <%= will_paginate %>
+    </div>
 </div>
 <%= render 'shared/room', obj: @rooms %>
 

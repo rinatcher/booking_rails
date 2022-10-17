@@ -1,0 +1,5 @@
+<h1 align="center"><%= @review.name %></h1>
+<div class="well col-xs-8 col-xs-offset-2">
+  <h4 class="center"><strong>Отзыв:</strong></h4>
+  <%= simple_format(@review.description) %>
+  <%= link_to 'Back', reviews_path, class: "btn btn-xs btn-primary" %>

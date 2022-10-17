@@ -1,30 +1,39 @@
 # frozen_string_literal: true
 
-class BookingsController < ApplicationController
-  before_action :set_room, only: %i[new]
+module Admin
+  class BookingsController < ApplicationController
+    before_action :set_booking, only: %i[update destroy]
+    before_action :authenticate_user!
 
-  def new
-    @booking = Booking.new
-  end
-
-  def create
-    @booking = Booking.new(booking_params)
-    # @booking.approved = false
-    if @booking.save
-      flash[:notice] = 'Номер успешно забронирован!'
-      redirect_to rooms_path
-    else
-      flash[:alert] = 'Неверно введены данные'
+    def index
+      @bookings = Booking.paginate(page: params[:page], per_page: 5).order(created_at: :desc)
+      @bookings_approved = Booking.where(approved: 1)
+      respond_to do |format|
+        format.html
+        format.csv do
+          send_data @bookings_approved.to_csv,
+                    filename: "bookings-#{Time.zone.today}.csv"
+        end
+        format.xlsx
+      end
     end
-  end
 
-  private
+    def update
+      @booking.update(approved: 1)
+      redirect_to admin_bookings_path
+      flash[:success] = 'Бронь подтверждена'
+    end
 
-  def set_room
-    @room = Room.find(params[:format])
-  end
+    def destroy
+      @booking.destroy
+      flash[:success] = 'Бронь удалена'
+      redirect_to admin_bookings_path
+    end
 
-  def booking_params
-    params.require(:booking).permit(:name, :email, :start_date, :end_date)
+    private
+
+    def set_booking
+      @booking = Booking.find(params[:id])
+    end
   end
 end

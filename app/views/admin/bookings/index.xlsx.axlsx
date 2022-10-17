@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: 'bookings') do |sheet|
+  sheet.add_row %w[id name email start_date end_date created_at
+                   updated_at approved]
+  @bookings.where(approved: 1).each do |booking|
+    sheet.add_row [booking.id, booking.name, booking.email, booking.start_date,
+                   booking.end_date, booking.created_at, booking.updated_at, booking.approved]
+  end
+end

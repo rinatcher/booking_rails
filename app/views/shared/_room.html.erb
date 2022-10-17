@@ -1,0 +1,32 @@
+<% obj.each do |room| %>
+
+    <div class="col-xs-6 col-md-3">
+      <div class="well well-lg">
+        <div class="review-title">
+          <%= link_to room.name, new_booking_path(room_id: room.id) %>
+          <% if room.images.attached? %>
+            <%= image_tag room.images.first, width: "100%" %>
+            <% else %>
+              <%= image_tag "https://www.freeiconspng.com/uploads/no-image-icon-4.png", width: "80%"%>
+          <% end %>
+        </div>
+        <div class="review-body">
+          <% if current_user.try(:admin?) %>
+            <small>Created <%= time_ago_in_words(room.created_at) %> ago,
+              updated: <%= time_ago_in_words(room.updated_at) %> ago</small>
+          <% else %>
+            <%= "RUB #{room.price}  за ночь" %>
+        <% end %>
+        </div>
+        <div class="review-actions">
+          <% if current_user.try(:admin?) %>
+            <%= link_to "Edit", edit_admin_room_path(room), class: "btn btn-xs btn-primary" %>
+            <%= link_to 'Delete', admin_room_path(room), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+                        class: "btn btn-xs btn-danger" %>
+          <% else %>
+            <%= link_to "Забронировать", new_booking_path(room_id: room.id), class: "btn btn-xs btn-primary" %>
+          <% end %>
+            </div>
+      </div>
+    </div>
+<% end %>

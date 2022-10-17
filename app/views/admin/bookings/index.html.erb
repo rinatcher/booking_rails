@@ -1,0 +1,9 @@
+<div align="center">
+  <h1>Список заявок на бронирование</h1>
+  <%= link_to 'Скачать данные в CSV', admin_bookings_path(format: :csv), class: "btn btn-xs btn-primary"%>
+  <%= link_to 'Скачать данные в XLSX ', admin_bookings_path(format: :xlsx), class: "btn btn-xs btn-primary" %>
+  <div class="flickr_pagination">
+    <%= will_paginate %>
+  </div>
+</div>
+  <%= render 'shared/bookings_admin', obj: @bookings %>

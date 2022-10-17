@@ -1,7 +1,7 @@
 <%= render 'shared/errors', obj: @room %>
 <div class="row">
   <div class="col-xs-12">
-    <%= form_with model: @room, :html => {class: "form-horizontal", role: "form"} do |f| %>
+    <%= form_with model: @room, url: @room.new_record? ? admin_rooms_path : admin_room_path(@room), :html => {class: "form-horizontal", role: "form"} do |f| %>
       <div class="form-group">
         <div class="control-label col-sm-2">
           <%= f.label :name %>
